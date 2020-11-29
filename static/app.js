@@ -13,12 +13,12 @@ filteredData.on("click", function () {
 
     var date = d3.select("#datetime");
     var city = d3.select("#city");
-    var state = d3.select("#statename");
-    var country = d3.select("#countryname");
-    var shape = d3.select("#shapename");
+    var state = d3.select("#state");
+    var country = d3.select("#country");
+    var shape = d3.select("#shape");
 
     //create variables to get and hold values from inputs
-    var dateValue = date.property("value")
+    var dateValue = date.property("value");
     var cityValue = city.property("value").toLowerCase().trim();
     var stateValue = state.property("value").toLowerCase().trim();
     var countryValue = country.property("value").toLowerCase().trim();
@@ -39,6 +39,8 @@ filteredData.on("click", function () {
     }
     if (shapeValue !== "") {
         Data = Data.filter(entry => entry.shape === shapeValue);
-        console.log(Data)
+//console.log(Data)
     }
+retrieveData();    
 });
+function
