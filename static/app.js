@@ -1,5 +1,5 @@
 //varibale to hold table body
-var tableBod = d3.select("tbody")
+var tableBod = d3.select("#tbodyid")
 
 //Variable to hold data
 var Data = data;
@@ -39,8 +39,22 @@ filteredData.on("click", function () {
     }
     if (shapeValue !== "") {
         Data = Data.filter(entry => entry.shape === shapeValue);
-//console.log(Data)
+        //console.log(Data)
     }
-retrieveData();    
+    retrieveData();
 });
-function
+function retrieveData() {
+    tableBod.empty();
+    Data.forEach(function (item) {
+        var row = filteredData.append("tr");
+        Object.data(item).forEach(function ([key, value]) {
+            var cell = filteredData.append("td");
+            cell.text(value);
+        });
+    });
+}
+var filteredClear = d3.select("#clear-btn")
+filteredClear.on("click", function () {
+    location.reload();
+});
+retrieveData();
