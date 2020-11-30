@@ -1,66 +1,35 @@
 //varibale to hold table body
 var tableBod = d3.select("#tbodyid")
 
-//Variable to hold data
-var Data = data;
+// from data.js
+var tableData = data;
 
-var filterButton = d3.select('#filter-btn');
-filterButton.on('click', function() {
-    //prevent page from refreshing
-    d3.event.preventDefault()
-
-    var date = d3.select("#datetime");
-    var city = d3.select("#city");
-    var state = d3.select("#state");
-    var country = d3.select("#country");
-    var shape = d3.select("#shape");
-
-    //create variables to get and hold values from inputs
-    var dateValue = date.property("value");
-    var cityValue = city.property("value").toLowerCase().trim();
-    var stateValue = state.property("value").toLowerCase().trim();
-    var countryValue = country.property("value").toLowerCase().trim();
-    var shapeValue = shape.property("value").toLowerCase().trim();
-    //console.log()
-
-    //Create multiple filter elements
-    if (dateValue !== "") {
-        Data = Data.filter(entry => entry.datetime === dateValue);
-    }
-    if (cityValue !== "") {
-        Data = Data.filter(entry => entry.city === cityValue);
-    }
-    if (stateValue != "") {
-        Data = Data.filter(entry => entry.state === stateValue);
-    }
-    if (countryValue !== "") {
-        Data = Data.filter(entry => entry.country === cityValue);
-    }
-    if (shapeValue !== "") {
-        Data = Data.filter(entry => entry.shape === shapeValue);
-        //console.log(Data)
-    }
-    retrieveData();
-});
-function retrieveData() {
-    tableBod.empty();
-<<<<<<< HEAD
-    Data.forEach((item) => {
-        var row = tableBod.append("tr");
-        Object.entries(item).forEach(([key, value]) => {
-            var cell = row.append("td");
-=======
-    Data.forEach(function (item) {
-        var row = filteredData.append("tr");
-        Object.data(item).forEach(function ([key, value]) {
-            var cell = filteredData.append("td");
->>>>>>> 1542c93b062d247c87496e5cba4421d41c5d2618
-            cell.text(value);
+// Copy data into rows on HTML 
+function appendTable(data) {
+    d3.select("tbody").html("");
+    data.forEach((selection) => {
+        var tableRow = d3.select("tbody").append("tr");
+        Object.values(selection).forEach((value) => {
+            var tableData = tableRow.append("td");
+            tableData.text(value);
         });
-    });
+    })
 }
-var filteredClear = d3.select("#clear-btn")
-filteredClear.on("click", function () {
+appendTable(tableData);
+
+d3.select("#filter-btn").on("click", filterDate);
+
+// Set Filter button function to filter by date
+function filterDate() {
+    d3.event.preventDefault();
+    var date = d3.select("#datetime").property("value");
+    var filterDateTime = tableData;
+    if (date) {
+        filterDateTime = filterDateTime.filter((row) => row.datetime === date);
+    }
+appendTable(filterDateTime);
+};
+var clearButton = d3.select("#clear-btn");
+clearButton.on("click", function(){
     location.reload();
 });
-retrieveData();
