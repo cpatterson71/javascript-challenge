@@ -44,10 +44,17 @@ filterButton.on('click', function() {
 });
 function retrieveData() {
     tableBod.empty();
+<<<<<<< HEAD
     Data.forEach((item) => {
         var row = tableBod.append("tr");
         Object.entries(item).forEach(([key, value]) => {
             var cell = row.append("td");
+=======
+    Data.forEach(function (item) {
+        var row = filteredData.append("tr");
+        Object.data(item).forEach(function ([key, value]) {
+            var cell = filteredData.append("td");
+>>>>>>> 1542c93b062d247c87496e5cba4421d41c5d2618
             cell.text(value);
         });
     });
